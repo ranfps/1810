@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--  加载外部资源文件  -->
+	<properties resource="db.properties"></properties>
+	<!-- 日志插件 -->
+	<settings>
+		<setting name="logImpl" value="STDOUT_LOGGING"/>
+	</settings>
+	<!-- 给实体类起别名 -->
+	<typeAliases>
+		<package name="com.bw.entity"/>
+	</typeAliases>
+	<!-- 分页工具类 -->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+	</plugins>
+	<!-- 运行环境 -->
+	<environments default="mysql">
+		<environment id="mysql">
+			<!-- 事务管理器 -->
+			<transactionManager type="JDBC"/>
+			<!-- 数据源 -->
+			<dataSource type="POOLED">
+				<property name="driver"   value="${db.driver}"/>
+				<property name="url"      value="${db.url}"/>
+				<property name="username" value="${db.username}"/>
+				<property name="password" value="${db.password}"/>
+			</dataSource>
+			
+		</environment>	
+	</environments>
+	
+	
+	<!-- 加载mapper映射文件 -->
+	<mappers>
+		<package name="com.bw.dao"/>
+	</mappers>
+</configuration>
